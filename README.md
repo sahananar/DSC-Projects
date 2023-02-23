@@ -25,7 +25,9 @@ The nutritional values for each recipe were stored in a format that resembled a 
 
 Finally, while examining the 'minutes' column which would be crucial for my analysis, I realized that several values were very large, the maximum such number being 1051200 minutes. These numbers are an unreasonable value for cooking time and it would not be logical to include values above a certain threshold in the analysis. Therefore, I decided to set the range to 600 minutes, or 10 hours. Any value larger than this would be replaced with np.nan as it is not reasonable a recipe would take significantly longer than this to prepare. 
 
-Once this step was finished, I created a condensed dataframe which contained only the columns of 'name', 'recipe_id', 'minutes', 'n_steps', 'rating', 'avg_rating', 'calories', 'sugar', and 'protein'. Not all of these columns would be used later on however these were the ones I kept as I felt they were more relevant than columns such as 'description' or 'ingredients', which were irrelevant to my analysis and were also stretching out the size of the dataframe and making it look disproportionate. 
+Once this step was finished, I created a condensed dataframe which contained only the columns of 'name', 'recipe_id', 'minutes', 'n_steps', 'rating', 'avg_rating', 'calories', 'sugar', and 'protein'.
+
+Note that not all of these columns would necessarily be relevant later on however these were the ones I kept as I felt they were more relevant than columns such as 'description' or 'ingredients', which were irrelevant to my analysis and were also stretching out the size of the dataframe and making it look disproportionate. 
 
 Here is the `head` of the cleaned and condensed dataframe:
 
@@ -66,6 +68,24 @@ Here is a scatter plot of the 'minutes' and 'avg_rating' columns. The majority o
 
 **Interesting Aggregates**
 
+At first I groupbed by the cooking time in minutes and calculated the mean. However, this table was hard to analyze as the minutes were only shown one by one. Therefore, by using the `pd.cut` function, I was able to put the cooking time into ranges of 50 minutes each, and then aggregated by the mean. The significance of this aggregation is that it shows that the average rating does not vary significantly between the different intervals. 
+
+Below is the grouped table. Note that the other columns are not necessarily relevant or useful for the analysis, as I was mostly focusing on the 'avg_rating' column. 
+
+|   recipe_id |   minutes |   n_steps |   rating |   avg_rating |
+|------------:|----------:|----------:|---------:|-------------:|
+|      372684 |   25.4843 |   8.77129 |  4.68786 |      4.68481 |
+|      376780 |   69.6132 |  12.6511  |  4.6782  |      4.67488 |
+|      369383 |  126.451  |  13.7997  |  4.66961 |      4.66492 |
+|      374804 |  182.488  |  13.3555  |  4.66527 |      4.66131 |
+|      371324 |  232.036  |  12.4014  |  4.64996 |      4.64883 |
+|      364934 |  266.25   |  16.8119  |  4.59735 |      4.59033 |
+|      360641 |  317.386  |   9.77334 |  4.62582 |      4.62338 |
+|      367767 |  374.148  |   9.42297 |  4.50586 |      4.50425 |
+|      361892 |  430.585  |   9.94678 |  4.56587 |      4.56607 |
+|      371143 |  491.95   |   7.84936 |  4.56808 |      4.56494 |
+|      374323 |  518.986  |  11.3495  |  4.63362 |      4.63358 |
+
 # Assessment of Missingness
 
 
@@ -73,10 +93,12 @@ Here is a scatter plot of the 'minutes' and 'avg_rating' columns. The majority o
 
 The topic I decided to investigate was the relationship between the cooking time and average rating of recipes. Specifically, I wanted to answer the question of whether recipes with a lower cooking time (under 100 minutes) would have a higher average rating than recipes with a cooking time of over 100 minutes. 
 
-**Null Hypothesis** : The mean rating of recipes with a cooking time of under 100 minutes is equal to the mean rating of recipes with a cooking time of over 100 minutes. 
+**Null Hypothesis** : The mean proportion of stars recieved by recipes with a cooking time of under 100 minutes is equal to the mean proportion of stars recieved of recipes with a cooking time of over 100 minutes.
 
-**Alternate Hypothesis** : The mean rating of recipes with a cooking time of under 100 minutes is greater than the mean rating of recipes with a cooking time of over 100 minutes. 
+**Alternate Hypothesis** : The mean proportion of stars recieved by recipes with a cooking time of under 100 minutes is greater than the mean proportion of stars recieved by recipes with a cooking time of over 100 minutes.
 
-The significance level used here will be 1%. The test statistic used is the mean rating for recipes with under 100 minutes cooking time divided by 5 so it would be represented as a proportion, this value was 0.938. I simulated 100000 of the test statistic using the number of entries under 100 minutes as the sample size, which was 205218. 
+Note that the 'mean proportion of stars recieved' refers to the mean rating of the recipe, divided by 5, so that the ratings could be compared to one another as proportions. 
 
-The resulting p-value was 0.006915. Since this p-value is under the chosen significance level of 1%, this indicates we can reject the null hypothesis that the mean ratings of recipes with lower cooking times are equal to the main ratings of recipes with over 100 minutes cooking time. 
+The significance level used here will be 1%. The test statistic used is the mean rating for recipes with under 100 minutes cooking time divided by 5, which was 0.938. I simulated 100000 values of the test statistic using the number of entries under 100 minutes as the sample size, which was 205218, and the mean proportion of stars recieved by all recipes as the parameter for the `np.random.multinomial` function. 
+
+The resulting p-value was 0.00601. Since this p-value is under the chosen significance level of 1%, this indicates we can reject the null hypothesis that the mean ratings of recipes with lower cooking times are equal to the main ratings of recipes with over 100 minutes cooking time. 
