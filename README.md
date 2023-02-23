@@ -88,6 +88,16 @@ Below is the grouped table. Note that the other columns are not necessarily rele
 
 # Assessment of Missingness
 
+**NMAR Analysis**
+
+The column whose misingness I will be investigating is the 'rating' column. As mentioned above, for the purposes of this dataset, values of 0 were considered to be missing and were replaced with `np.nan`. 
+
+I think that this missingness from the 'rating' column is NMAR, as there is an indication that the missingness of these ratings depends on the actual values themselves. For example, if a recipe did have a low rating such as 1 or 2, the rating might have just been filled in as 0 to indicate a null value, as the users would be more hesitant to report an actual low rating. This would also explain the trends from the analyses above, as most of the recorded ratings ended up being in the 4-5 range. Therefore, there is a likelihood of the missing values being intentionally left out so that it would appear that most recipes had very high ratings. 
+
+**Missingness Dependency**
+
+
+
 
 # Hypothesis Testing
 
