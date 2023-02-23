@@ -56,12 +56,13 @@ Next, to examine the 'avg_rating' column, I decided to look at it using a boxplo
 
 <iframe src="assets/ratings-boxplot.html" width=800 height=600 frameBorder=0></iframe>
 
-This plot is significantly skewed to the left, as it shows how most of the average ratings where on the higher side. The first quartile was at 4.5 stars and the third quartile was at 5 stars. It was rare that a recipe got an average or lower rating. 
+This plot is significantly skewed to the left, as it shows how most of the average ratings where on the higher side. The first quartile was at 4.5 stars and the third quartile was at 5 stars. It was rare that a recipe got an average or lower rating, as these values would be outliers. 
 
 **Bivariate Analysis**
 
 <iframe src="assets/scatterplot.html" width=800 height=600 frameBorder=0></iframe>
 
+Here is a scatter plot of the 'minutes' and 'avg_rating' columns. The majority of the data is clustered in the top left corner of the dataset - where there is less cooking time and higher average ratings. This would seem natural based on the results of the univariate analyses conducted above - most of the data was in the range of 100 minutes of cooking time and most of the average ratings were 4 or 5 stars. However, there are still a significant number of data points in other parts of the plot, and I decided to investigate this relationship further later on. 
 
 **Interesting Aggregates**
 
