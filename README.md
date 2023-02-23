@@ -23,7 +23,11 @@ Next, it was necessary to find the average rating per recipe, as this would be c
 The nutritional values for each recipe were stored in a format that resembled a list, however it was one large string. I thought it would be useful to have these individual values to investigate certain patterns for the bivariate analysis, so I split up the values and created a new column for each one, such as
 'calories', 'total fat', 'sugar', 'sodium', 'protein', 'saturated fat', and 'carbohydrates'. 
 
-Here is the `head` of the cleaned dataframe including some of the more relevant columns. Not all columns may be used later on but I decided not to include colums such as 'description' or 'ingredients' as they were irrelevant to my analysis and were also stretching out the size of the dataframe and making it look disproportionate. 
+Finally, while examining the `minutes` column which would be crucial for my analysis, I realized that several values were very large, the maximum such number being 1051200 minutes. These numbers are an unreasonable value for cooking time and it would not be logical to include values above a certain threshold in the analysis. Therefore, I decided to set the range to 600 minutes, or 10 hours. Any value larger than this would be replaced with np.nan as it is not reasonable a recipe would take significantly longer than this to prepare. 
+
+Once this step was finished, I created a condensed dataframe which contained only the columns of 'name', 'recipe_id', 'minutes', 'n_steps', 'rating', 'avg_rating', 'calories', 'sugar', and 'protein'. Not all of these columns would be used later on however these were the ones I kept as I felt they were more relevant than columns such as 'description' or 'ingredients', which were irrelevant to my analysis and were also stretching out the size of the dataframe and making it look disproportionate. 
+
+Here is the `head` of the cleaned and condensed dataframe:
 
 | name                                 |   recipe_id |   minutes |   n_steps |   rating |   avg_rating |   calories |   sugar |   protein |
 |:-------------------------------------|------------:|----------:|----------:|---------:|-------------:|-----------:|--------:|----------:|
@@ -37,6 +41,12 @@ Here is the `head` of the cleaned dataframe including some of the more relevant 
 Once all these steps were finished, the dataset had been cleaned and then I moved onto the analysis.
 
 **Univariate Analysis**
+
+<iframe src="assets/minutes-histogram.html" width=800 height=600 frameBorder=0></iframe>
+
+**Bivariate Analysis**
+
+**Interesting Aggregates**
 
 
 # Assessment of Missingness
