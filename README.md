@@ -56,9 +56,12 @@ Next, to examine the 'avg_rating' column, I decided to look at it using a boxplo
 
 <iframe src="assets/ratings-boxplot.html" width=800 height=600 frameBorder=0></iframe>
 
-This plot was interesting as it shows how most of the average ratings where on the higher side. The first quartile was at 4.5 stars and the third quartile was at 5 stars. It was rare that a recipe got an average or lower rating. 
+This plot is significantly skewed to the left, as it shows how most of the average ratings where on the higher side. The first quartile was at 4.5 stars and the third quartile was at 5 stars. It was rare that a recipe got an average or lower rating. 
 
 **Bivariate Analysis**
+
+<iframe src="assets/scatterplot.html" width=800 height=600 frameBorder=0></iframe>
+
 
 **Interesting Aggregates**
 
