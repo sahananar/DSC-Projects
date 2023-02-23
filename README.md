@@ -54,9 +54,9 @@ The distribution is significantly skewed right, with most of the values lying in
 
 Next, to examine the 'avg_rating' column, I decided to look at it using a boxplot:
 
-<iframe src="assets/ratings-boxplot-histogram.html" width=800 height=600 frameBorder=0></iframe>
+<iframe src="assets/ratings-boxplot.html" width=800 height=600 frameBorder=0></iframe>
 
-
+This plot was interesting as it shows how most of the average ratings where on the higher side. The first quartile was at 4.5 stars and the third quartile was at 5 stars. It was rare that a recipe got an average or lower rating. 
 
 **Bivariate Analysis**
 
