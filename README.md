@@ -14,7 +14,7 @@ The initial ratings dataset contained 731927 rows and 5 columns: 'user_id', 'rec
 
 # Data Cleaning and EDA
 
-**Cleaning**
+**Data Cleaning**
 
 The first step was to merge the ratings and recipes datasets together. I first had to rename the 'id' column of the recipes dataset to 'recipe_id', so that it would match the name of the column from the ratings dataset and the merge function would find a common column. The recipes dataset was then left merged with the ratings dataset. Next, all ratings of 0 were replaced with `np.nan`. This was a reasonable step as we can predict that instead of giving a recipe a 0 rating, it is more likely that the user did not submit their rating for that recipe and it had just been filled with 0 instead. 
 
@@ -42,7 +42,21 @@ Once all these steps were finished, the dataset had been cleaned and then I move
 
 **Univariate Analysis**
 
+Below is the histogram generated for the modified 'minutes' column of the dataset:
+
 <iframe src="assets/minutes-histogram.html" width=800 height=600 frameBorder=0></iframe>
+
+To further examine the distribution of the data in the first 100 minutes, where most of the data was clustered, I selected only those rows and then created another plot:
+
+<iframe src="assets/minutes100-histogram.html" width=800 height=600 frameBorder=0></iframe>
+
+The distribution is significantly skewed right, with most of the values lying in the 0-100 minutes range, as shown in more detail in the second plot. However, there are some outliers ranging until 500 to 600 minutes as well. From both plots, we can see that there are alternating 'spikes', where the bars get shorter and then taller again. Upon examination of the second plot, it seems like these 'spikes' occur at multiples of 5. This is most likely the case due to users deciding to 'round' their cooking times, for example if the actual cooking time of a recipe is 28 minutes, there is a likelihood of the user rounding this to 30 minutes as it is a more 'clean' number. 
+
+Next, to examine the 'avg_rating' column, I decided to look at it using a boxplot:
+
+<iframe src="assets/ratings-boxplot-histogram.html" width=800 height=600 frameBorder=0></iframe>
+
+
 
 **Bivariate Analysis**
 
