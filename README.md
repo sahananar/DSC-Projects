@@ -66,8 +66,17 @@ Here is a scatter plot of the 'minutes' and 'avg_rating' columns. The majority o
 
 **Interesting Aggregates**
 
-
 # Assessment of Missingness
 
 
 # Hypothesis Testing
+
+The topic I decided to investigate was the relationship between the cooking time and average rating of recipes. Specifically, I wanted to answer the question of whether recipes with a lower cooking time (under 100 minutes) would have a higher average rating than recipes with a cooking time of over 100 minutes. 
+
+**Null Hypothesis** : The mean rating of recipes with a cooking time of under 100 minutes is equal to the mean rating of recipes with a cooking time of over 100 minutes. 
+
+**Alternate Hypothesis** : The mean rating of recipes with a cooking time of under 100 minutes is greater than the mean rating of recipes with a cooking time of over 100 minutes. 
+
+The significance level used here will be 1%. The test statistic used is the mean rating for recipes with under 100 minutes cooking time divided by 5 so it would be represented as a proportion, this value was 0.938. I simulated 100000 of the test statistic using the number of entries under 100 minutes as the sample size, which was 205218. 
+
+The resulting p-value was 0.006915. Since this p-value is under the chosen significance level of 1%, this indicates we can reject the null hypothesis that the mean ratings of recipes with lower cooking times are equal to the main ratings of recipes with over 100 minutes cooking time. 
