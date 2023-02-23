@@ -1,6 +1,4 @@
-# Recipes and Ratings
-
-DSC 80 Project #3
+DSC 80 Project #3 - Investigating the Recipes and Ratings Dataset
 
 By: Sahana Narayanan (sanarayanan@ucsd.edu)
 
@@ -8,7 +6,9 @@ By: Sahana Narayanan (sanarayanan@ucsd.edu)
 
 This dataset contains information about recipes and the reviews and ratings submitted for them. The recipes dataset contains basic information about the name of the recipe, the cooking time, nutrition information, steps and a description. The ratings dataset contains information about the specific reviews given. 
 
-The research question that I was the most interested in exploring was if there is a relationship between cooking time and the average rating of the recipes. I initially wondered if the average rating would be higher when the cooking time as more, as the food was prepared for longer, however this may also not necessarily be the case as some recipes simply may not require a longer cooking time and this wouldn't affect their rating, so I decided to investigate this topic further. 
+**Question of Interest**: What is the relationship between cooking time and the average rating of recipes?
+
+I initially wondered if the average rating would be higher when the cooking time as more, as the food was prepared for longer, however this may also not necessarily be the case as some recipes simply may not require a longer cooking time and this wouldn't affect their rating, so I decided to investigate this topic further. 
 
 The initial ratings dataset contained 731927 rows and 5 columns: 'user_id', 'recipe_id', 'date', 'rating', and 'review'. The initial recipes dataset contained 83782 rows and 12 columns: 'name', 'id', 'minutes', 'contributor_id', 'submitted', 'tags', 'nutrition', 'n_steps', 'steps', 'description', 'ingredients' and 'n_ingredients'. Once the datasets were merged together and cleaned (this will be further explained in the next section), the resulting dataset contained 234429 rows. While all columns from both datasets were kept, the ones that were most relevant were 'recipe_id', which identified the recipe, 'rating', which described how well the recipe was rated and 'minutes', indicating the cooking time. 
 
@@ -70,7 +70,7 @@ Here is a scatter plot of the 'minutes' and 'avg_rating' columns. The majority o
 
 At first I groupbed by the cooking time in minutes and calculated the mean. However, this table was hard to analyze as the minutes were only shown one by one. Therefore, by using the `pd.cut` function, I was able to put the cooking time into ranges of 50 minutes each, and then aggregated by the mean. The significance of this aggregation is that it shows that the average rating does not vary significantly between the different intervals. 
 
-Below is the grouped table. Note that the other columns are not necessarily relevant or useful for the analysis, as I was mostly focusing on the 'avg_rating' column. 
+Below is the grouped table. Note that the other columns are not necessarily relevant or useful for the analysis, as I was mainly focusing on the 'avg_rating' column. 
 
 |   recipe_id |   minutes |   n_steps |   rating |   avg_rating |
 |------------:|----------:|----------:|---------:|-------------:|
