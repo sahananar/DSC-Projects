@@ -20,8 +20,7 @@ The first step was to merge the ratings and recipes datasets together. I first h
 
 Next, it was necessary to find the average rating per recipe, as this would be crucial to use for the analaysis. The table was grouped by 'recipe_id' and the mean of the ratings column for each recipe was found. Then, a new column was added to the dataframe ontaining these average ratings per recipe ID. 
 
-The nutritional values for each recipe were stored in a format that resembled a list, however it was one large string. I thought it would be useful to have these individual values to investigate certain patterns for the bivariate analysis, so I split up the values and created a new column for each one, such as
-'calories', 'total fat', 'sugar', 'sodium', 'protein', 'saturated fat', and 'carbohydrates'. 
+The nutritional values for each recipe were stored in a format that resembled a list, however it was one large string. I thought it would be useful to have these individual values to investigate certain patterns for the bivariate analysis, so I split up the values and created a new column for each one, such as 'calories', 'total fat', 'sugar', 'sodium', 'protein', 'saturated fat', and 'carbohydrates'. 
 
 Finally, while examining the 'minutes' column which would be crucial for my analysis, I realized that several values were very large, the maximum such number being 1051200 minutes. These numbers are an unreasonable value for cooking time and it would not be logical to include values above a certain threshold in the analysis. Therefore, I decided to set the range to 600 minutes, or 10 hours. Any value larger than this would be replaced with np.nan as it is not reasonable a recipe would take significantly longer than this to prepare. 
 
@@ -72,19 +71,19 @@ At first I groupbed by the cooking time in minutes and calculated the mean. Howe
 
 Below is the grouped table. Note that the other columns are not necessarily relevant or useful for the analysis, as I was mainly focusing on the 'avg_rating' column. 
 
-| minutes    |   recipe_id |   minutes |   n_steps |   rating |   avg_rating |
-|:-----------|------------:|----------:|----------:|---------:|-------------:|
-| (0, 50]    |      372684 |   25.4843 |   8.77129 |  4.68786 |      4.68481 |
-| (50, 100]  |      376780 |   69.6132 |  12.6511  |  4.6782  |      4.67488 |
-| (100, 150] |      369383 |  126.451  |  13.7997  |  4.66961 |      4.66492 |
-| (150, 200] |      374804 |  182.488  |  13.3555  |  4.66527 |      4.66131 |
-| (200, 250] |      371324 |  232.036  |  12.4014  |  4.64996 |      4.64883 |
-| (250, 300] |      364934 |  266.25   |  16.8119  |  4.59735 |      4.59033 |
-| (300, 350] |      360641 |  317.386  |   9.77334 |  4.62582 |      4.62338 |
-| (350, 400] |      367767 |  374.148  |   9.42297 |  4.50586 |      4.50425 |
-| (400, 450] |      361892 |  430.585  |   9.94678 |  4.56587 |      4.56607 |
-| (450, 500] |      371143 |  491.95   |   7.84936 |  4.56808 |      4.56494 |
-| (500, 550] |      374323 |  518.986  |  11.3495  |  4.63362 |      4.63358 |
+| minutes    |   recipe_id |   minutes |   n_steps |   rating |   avg_rating |   calories |   sugar |   protein |
+|:-----------|------------:|----------:|----------:|---------:|-------------:|-----------:|--------:|----------:|
+| (0, 50]    |      372684 |   25.4843 |   8.77129 |  4.68786 |      4.68481 |    361.964 | 55.2036 |   27.5531 |
+| (50, 100]  |      376780 |   69.6132 |  12.6511  |  4.6782  |      4.67488 |    527.5   | 86.6202 |   38.7338 |
+| (100, 150] |      369383 |  126.451  |  13.7997  |  4.66961 |      4.66492 |    597.405 | 89.415  |   49.4835 |
+| (150, 200] |      374804 |  182.488  |  13.3555  |  4.66527 |      4.66131 |    587.618 | 70.7414 |   48.7739 |
+| (200, 250] |      371324 |  232.036  |  12.4014  |  4.64996 |      4.64883 |    683.58  | 80.0919 |   70.5305 |
+| (250, 300] |      364934 |  266.25   |  16.8119  |  4.59735 |      4.59033 |    613.291 | 63.5045 |   73.9955 |
+| (300, 350] |      360641 |  317.386  |   9.77334 |  4.62582 |      4.62338 |    474.154 | 45.2018 |   53.5437 |
+| (350, 400] |      367767 |  374.148  |   9.42297 |  4.50586 |      4.50425 |    471.929 | 50.5974 |   64.7647 |
+| (400, 450] |      361892 |  430.585  |   9.94678 |  4.56587 |      4.56607 |    469.973 | 45.0182 |   65.9412 |
+| (450, 500] |      371143 |  491.95   |   7.84936 |  4.56808 |      4.56494 |    435.405 | 44.8901 |   62.1593 |
+| (500, 550] |      374323 |  518.986  |  11.3495  |  4.63362 |      4.63358 |    392.57  | 41.6311 |   47.0408 |
 
 # Assessment of Missingness
 
@@ -96,8 +95,17 @@ I think that this missingness from the 'rating' column is NMAR, as there is an i
 
 **Missingness Dependency**
 
+Pick a column in the dataset with non-trivial missingness to analyze, and perform permutation tests to analyze the dependency of the missingness of this column on other columns.
 
+The column whose missingness I will analyze is again the 'rating' column. I will be conducting permutation tests of this column against the 'protein' and 'n_steps' columns to analyze the missingness dependency. 
 
+To do this, I created a new column in the dataset called 'null_rating', which would say 'True' if the rating for that particular row was missing and 'False' otherwise. The test statistic I would be using here is the difference in means between the 'True' and 'False' groups for the particular column. 
+
+Here is a bar chart of the distributions of the means of the 'protein' and 'n_steps' column based on the missingness of the 'rating' column, indicated by 'null_rating.'
+
+<iframe src="assets/barplot.html" width=800 height=600 frameBorder=0></iframe>
+
+Once conducting 500 iterations of the permutation test for both columns using `np.random.permutation`, I obtained p-values under the significance value for both tests, therefore I concluded that the missingness of the 'rating' column was not dependent on either of these columns, and it provided evidence to my reasoning above that the 'rating' column is NMAR. 
 
 # Hypothesis Testing
 
